@@ -1,11 +1,8 @@
 package app
 
 import (
+	"api-contracts-check/config"
 	"net/http"
-)
-
-const (
-	serverPort = "8080"
 )
 
 type Application struct {
@@ -13,14 +10,14 @@ type Application struct {
 	serverPort string
 }
 
-func BuildApplication() *Application {
+func BuildApplication(cfg *config.Config) *Application {
 	mux := http.NewServeMux()
-	app := &Application{mux: mux}
+	app := &Application{mux: mux, serverPort: cfg.Port}
 	app.registerHandlers()
 
 	return app
 }
 
 func (app *Application) Run() error {
-	return http.ListenAndServe(":"+serverPort, app.mux)
+	return http.ListenAndServe(":"+app.serverPort, app.mux)
 }
