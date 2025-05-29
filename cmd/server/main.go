@@ -2,19 +2,18 @@ package main
 
 import (
 	"api-contracts-check/cmd/app"
-	"api-contracts-check/config"
-	"log"
-	"os"
+	"api-contracts-check/configs"
+	"api-contracts-check/libs/logger"
 )
 
 func main() {
-	envMode := os.Getenv("ENV_MODE")
-	cfg, err := config.LoadConfig(envMode)
-	if err != nil {
-		log.Fatal(err)
+	if err := configs.Build(); err != nil {
+		logger.Fatal(err)
 	}
 
-	application := app.BuildApplication(cfg)
+	logger.NewLogger(configs.Config.LoggerLevel)
+
+	application := app.BuildApplication()
 	if err := application.Run(); err != nil {
 		panic(err)
 	}
