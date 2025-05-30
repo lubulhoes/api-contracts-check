@@ -8,7 +8,7 @@ import (
 
 const (
 	development  = "development"
-	relativePath = "../../resources/configuration.json"
+	relativePath = "resources/configuration.json"
 )
 
 var Config *AppConfig
@@ -19,7 +19,8 @@ type AppConfig struct {
 }
 
 func Build() error {
-	if os.Getenv("GO_ENVIRONMENT") == development {
+	env := os.Getenv("GO_ENVIRONMENT")
+	if env == development {
 		return ReadConfigJSON(relativePath)
 	}
 	file, err := os.Open("configs.json")

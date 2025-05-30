@@ -42,19 +42,19 @@ func NewLogger(level string) {
 }
 
 func (l logger) Info(msg string, args ...any) {
-	l.Info(msg, args...)
+	l.logger.Info(msg, args...)
 }
 
 func (l logger) Warn(msg string, args ...any) {
-	l.Warn(msg, args...)
+	l.logger.Warn(msg, args...)
 }
 
 func (l logger) Error(msg string, args ...any) {
-	l.Error(msg, args...)
+	l.logger.Error(msg, args...)
 }
 
 func (l logger) Debug(msg string, args ...any) {
-	l.Debug(msg, args...)
+	l.logger.Debug(msg, args...)
 }
 
 func Info(msg string, args ...any) {

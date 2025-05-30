@@ -2,7 +2,8 @@ package app
 
 import (
 	"api-contracts-check/configs"
-	"log/slog"
+	"api-contracts-check/libs/logger"
+	"fmt"
 	"net/http"
 )
 
@@ -20,6 +21,6 @@ func BuildApplication() *Application {
 }
 
 func (app *Application) Run() error {
-	slog.Info("Starting server on port:", app.serverPort)
+	logger.Info(fmt.Sprintf("Starting server on port: %s", app.serverPort))
 	return http.ListenAndServe(":"+app.serverPort, app.mux)
 }
